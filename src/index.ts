@@ -57,6 +57,17 @@ const createSharedSlice: StateCreator<
   getBoth: () => get().bears + get().fishes,
 })
 
+type WithValue = { value: number }
+function doubleit({ value }: WithValue) {
+  return value * 2
+}
+const fromVariable = { value: 2, BADKEY: 42 }
+// Succeeds, fromVariable matches WithValue.
+doubleit(fromVariable) 
+
+// ERROR, in the object literal form, we cannot pass additional keys.
+doubleit({ value: 2, BADKEY: 42 })
+
 export const useBoundStore = create<BearSlice & FishSlice & SharedSlice>()(
   immer((...a) => ({
     ...createBearSlice(...a),
