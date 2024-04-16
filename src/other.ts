@@ -26,8 +26,9 @@ const createSlice: ImmerStateCreator<Slice> = (set, get, store) => {
     },
     decrement: (qty: number) => {
       set((state) => {
-        state.BADKEY = 42 // No error with zustand 4.5.2.
         state.count -= qty;
+        state.count = 'I am a string now' // Wrong type.
+        state.BADKEY = 42 // Invalid state key.
       })
     },
   };
